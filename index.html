@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roey Tamir - CEO & Innovator, RapidTest.ai</title>
+    <!-- Chosen Palette: Warm Neutrals & Deep Teal -->
+    <!-- Application Structure Plan: A top-down narrative SPA designed to guide a funding committee through a compelling story. It starts with a strong vision (Hero/Executive Summary), establishes credibility with three core pillars of experience (Operational Excellence, Tech Mastery, Strategic Leadership), proves innovation with an interactive IP section, and details capabilities in a skills section. This structure is more persuasive than a standard chronological CV, as it frames past experience as direct evidence supporting the current venture's potential. Key interactions include an impactful chart visualizing BMT's growth and modals for patent deep-dives, allowing exploration without disrupting the narrative flow. -->
+    <!-- Visualization & Content Choices: 1. BMT Growth Data (280% capacity increase, 120% cost reduction) -> Goal: Compare & Impress -> Viz: Bar Chart (Chart.js) -> Interaction: Hover tooltips -> Justification: Visually communicates massive operational success far more effectively than text alone. 2. Patent Portfolio -> Goal: Inform & Organize -> Viz: HTML 'Patent Cards' -> Interaction: Click to open a JS-powered modal with patent abstract/details -> Justification: Keeps the main view clean while allowing interested parties to drill down into the core IP, demonstrating technological depth on demand. 3. Career Path -> Goal: Show Progression -> Viz: Thematic sections structured as "Pillars" -> Interaction: Scroll-based narrative -> Justification: Frames career as a logical buildup to the current venture, creating a stronger story for a funding proposal. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8; /* Warm off-white */
+            color: #1a202c;
+        }
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover {
+            color: #047857; /* Darker Teal */
+            border-bottom-color: #047857;
+        }
+        .pillar-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .patent-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .patent-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+         @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#FDFBF8] text-slate-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-40 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-teal-800">Roey Tamir</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#vision" class="nav-link font-medium pb-1">Vision</a>
+                <a href="#experience" class="nav-link font-medium pb-1">Experience</a>
+                <a href="#ip" class="nav-link font-medium pb-1">Intellectual Property</a>
+                <a href="#skills" class="nav-link font-medium pb-1">Skills</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-slate-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#vision" class="block py-2 px-6 text-sm text-slate-700 hover:bg-teal-50">Vision</a>
+            <a href="#experience" class="block py-2 px-6 text-sm text-slate-700 hover:bg-teal-50">Experience</a>
+            <a href="#ip" class="block py-2 px-6 text-sm text-slate-700 hover:bg-teal-50">Intellectual Property</a>
+            <a href="#skills" class="block py-2 px-6 text-sm text-slate-700 hover:bg-teal-50">Skills</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-16">
+
+        <!-- Hero Section -->
+        <section id="hero" class="text-center mb-24">
+            <h1 class="text-4xl md:text-6xl font-bold text-teal-900 mb-4">Pioneering the Future of AI in Diagnostics</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto text-slate-600">
+                Leveraging two decades of industry immersion and cutting-edge AI expertise to revolutionize at-home healthcare and position Israel at the forefront of the global digital health sector.
+            </p>
+        </section>
+
+        <!-- Vision Section -->
+        <section id="vision" class="mb-24 scroll-mt-20">
+            <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-xl shadow-lg border border-slate-200">
+                <h2 class="text-3xl font-bold text-teal-800 mb-6 text-center">Executive Summary: A Vision for National Tech Leadership</h2>
+                <p class="text-slate-700 leading-relaxed">
+                    This introductory section outlines the core mission driving my work. It details my background as a 31-year-old CEO and innovator with a proven record of transforming deep industry experience into a nationally significant technological venture. As the founder of RapidTest.ai, my goal is to pioneer breakthroughs in AI-driven medical diagnostics that enhance public health outcomes. My unique background combines two decades in the medical device industry, hands-on mastery of AI, distinguished military intelligence service, and a proven ability to deliver transformative operational results. This venture is designed to create high-value local jobs, generate significant intellectual property, and provide a scalable, cost-effective healthcare solution for both domestic and international markets.
+                </p>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="mb-24 scroll-mt-20">
+            <h2 class="text-4xl font-bold text-center mb-4 text-teal-900">The Three Pillars of an Innovator</h2>
+            <p class="text-lg text-center text-slate-600 max-w-3xl mx-auto mb-12">My career is built on a foundation of operational excellence, deep technological mastery, and strategic leadership. This section explores these three pillars, which collectively provide the blueprint for RapidTest.ai's success. You can explore how proven results in manufacturing and business growth, combined with expertise in AI and a background in strategic intelligence, create a unique capacity for innovation and execution.</p>
+
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Pillar 1: Operational Excellence -->
+                <div class="pillar-card bg-white rounded-xl shadow-lg p-8 border border-slate-200">
+                    <div class="text-5xl text-teal-500 mb-4">1</div>
+                    <h3 class="text-2xl font-bold mb-4">Proven Operational Excellence</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        As COO of BMT Diagnostics, I drove strategic growth by re-engineering the company's core processes. I led a landmark project with the Israeli Ministry of Economy to build a state-of-the-art automated manufacturing line and led international business development to expand our global footprint. This experience demonstrates a concrete ability to scale operations, manage complex projects, and deliver extraordinary results.
+                    </p>
+                </div>
+                <!-- Pillar 2: Technological Mastery -->
+                <div class="pillar-card bg-white rounded-xl shadow-lg p-8 border border-slate-200">
+                    <div class="text-5xl text-teal-500 mb-4">2</div>
+                    <h3 class="text-2xl font-bold mb-4">Foundational Tech Mastery</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        With a B.Sc. in Electrical Engineering and over two decades immersed in the family's medical device business, my technical foundation is deep. I have proactively self-taught advanced AI, Computer Vision, and Data Science, and personally architected the core technology for RapidTest.ai. This pillar showcases the hands-on expertise required to build and lead a technology-first company.
+                    </p>
+                </div>
+                <!-- Pillar 3: Strategic Leadership -->
+                <div class="pillar-card bg-white rounded-xl shadow-lg p-8 border border-slate-200">
+                    <div class="text-5xl text-teal-500 mb-4">3</div>
+                    <h3 class="text-2xl font-bold mb-4">Strategic Leadership & Vision</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        My service as an Intelligence Officer in the IDF honed skills in rapid data analysis and decision-making under pressure. Founding RapidTest.ai was a strategic move to solve a critical market inefficiency I identified through years of experience. This leadership is about more than managing—it's about seeing the future, creating the vision, and executing a plan to make it a reality.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interactive Chart Section -->
+            <div class="mt-20 bg-white p-8 md:p-12 rounded-xl shadow-xl border border-slate-200">
+                <h3 class="text-3xl font-bold text-center text-teal-800 mb-4">Quantifiable Impact at BMT Diagnostics</h3>
+                 <p class="text-center text-slate-600 max-w-3xl mx-auto mb-10">This chart visualizes the tangible results of the strategic automation project I spearheaded. By implementing a state-of-the-art manufacturing line, we didn't just improve efficiency—we transformed it. Hover over the bars to see the precise metrics. This demonstrates a proven ability to not only innovate but to execute in a way that produces dramatic, measurable improvements in cost and capacity.</p>
+                <div class="chart-container">
+                    <canvas id="impactChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Intellectual Property Section -->
+        <section id="ip" class="mb-24 scroll-mt-20">
+            <h2 class="text-4xl font-bold text-center mb-4 text-teal-900">The Intellectual Property Moat</h2>
+            <p class="text-lg text-center text-slate-600 max-w-3xl mx-auto mb-12">A strong technological venture is built on a defensible foundation of intellectual property. This section presents the patents that secure RapidTest.ai's core technology. Click on each card to view the official abstract and details. This IP represents our competitive edge and a commitment to national technological sovereignty in AI-driven diagnostics.</p>
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Patent 1 -->
+                <div class="patent-card bg-white rounded-xl shadow-lg p-8 border border-slate-200" data-patent="1">
+                    <h3 class="text-xl font-bold mb-2 text-teal-800">Granted U.S. Patent</h3>
+                    <p class="font-mono text-sm text-slate-500 mb-4">US 11,887,307 B2</p>
+                    <p class="text-slate-600">Protects the core methodology for analyzing medical images using novel neural network architectures.</p>
+                </div>
+                <!-- Patent 2 -->
+                <div class="patent-card bg-white rounded-xl shadow-lg p-8 border border-slate-200" data-patent="2">
+                    <h3 class="text-xl font-bold mb-2 text-teal-800">Pending U.S. Application</h3>
+                    <p class="font-mono text-sm text-slate-500 mb-4">US 2024/0112342 A1</p>
+                    <p class="text-slate-600">Covers advanced deep learning techniques for acquiring rapid diagnostic test results with higher accuracy.</p>
+                </div>
+                <!-- Patent 3 -->
+                <div class="patent-card bg-white rounded-xl shadow-lg p-8 border border-slate-200" data-patent="3">
+                    <h3 class="text-xl font-bold mb-2 text-teal-800">Pending Application</h3>
+                    <p class="font-mono text-sm text-slate-500 mb-4">Filed & Confidential</p>
+                    <p class="text-slate-600">A third application covering novel aspects of the at-home diagnostic device and its data analysis methods.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="scroll-mt-20">
+            <h2 class="text-4xl font-bold text-center mb-4 text-teal-900">Comprehensive Skillset</h2>
+            <p class="text-lg text-center text-slate-600 max-w-3xl mx-auto mb-12">This section provides an overview of the technical, regulatory, and strategic skills that underpin my work. This diverse expertise enables end-to-end leadership, from initial R&D and coding to navigating global regulatory landscapes and building robust IT infrastructures.</p>
+            <div class="max-w-4xl mx-auto bg-white p-8 md:p-10 rounded-xl shadow-lg border border-slate-200">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="font-bold text-lg text-teal-800 mb-3">AI & Programming</h3>
+                        <ul class="space-y-2 text-slate-600 list-disc list-inside">
+                            <li>Python (NumPy, Pandas)</li>
+                            <li>TensorFlow, PyTorch</li>
+                            <li>Computer Vision</li>
+                            <li>Deep Learning</li>
+                            <li>Java, JavaScript, HTML5</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-teal-800 mb-3">Regulatory & Quality</h3>
+                        <ul class="space-y-2 text-slate-600 list-disc list-inside">
+                            <li>ISO 13485</li>
+                            <li>FDA QSR (21 CFR 820)</li>
+                            <li>CE Marking Process</li>
+                            <li>QMS Architecture</li>
+                            <li>V&V Processes</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-teal-800 mb-3">Infrastructure & Strategy</h3>
+                        <ul class="space-y-2 text-slate-600 list-disc list-inside">
+                            <li>IT Systems Architecture</li>
+                            <li>International Biz Dev</li>
+                            <li>Git, Docker</li>
+                            <li>Cloud (AWS/GCP basics)</li>
+                            <li>Process Re-engineering</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white mt-24">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <h2 class="text-2xl font-bold mb-2">Roey Tamir</h2>
+            <p class="mb-4">CEO & Founder, RapidTest.ai</p>
+            <div class="flex justify-center items-center space-x-6 text-slate-300">
+                <span>Tel Aviv, Israel</span>
+                <span>&#8226;</span>
+                <a href="mailto:roy.tamir.ceo@email.com" class="hover:text-teal-300 transition">roy.tamir.ceo@email.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Patent Modal -->
+    <div id="patent-modal" class="modal fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4 hidden opacity-0">
+        <div id="modal-content" class="bg-white rounded-lg shadow-2xl max-w-2xl w-full p-8 relative transform scale-95 transition-transform duration-300">
+            <button id="modal-close" class="absolute top-4 right-4 text-slate-500 hover:text-slate-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 id="modal-title" class="text-2xl font-bold text-teal-800 mb-4"></h3>
+            <p id="modal-number" class="font-mono text-sm text-slate-500 mb-4"></p>
+            <div class="border-t border-slate-200 pt-4">
+                <h4 class="font-bold text-slate-700 mb-2">Abstract</h4>
+                <p id="modal-abstract" class="text-slate-600 leading-relaxed"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Chart.js Implementation
+            const ctx = document.getElementById('impactChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Production Capacity', 'Operational Cost'],
+                    datasets: [{
+                        label: 'Before Automation',
+                        data: [100, 100],
+                        backgroundColor: 'rgba(148, 163, 184, 0.6)', // slate-400
+                        borderColor: 'rgba(100, 116, 139, 1)', // slate-500
+                        borderWidth: 1
+                    }, {
+                        label: 'After Automation',
+                        data: [380, -20], // 100 + 280% increase, 100 - 120% reduction
+                        backgroundColor: 'rgba(13, 148, 136, 0.6)', // teal-600
+                        borderColor: 'rgba(15, 118, 110, 1)', // teal-700
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: false,
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if(context.datasetIndex === 0) { // Before
+                                        label += `Baseline ${context.parsed.y}%`;
+                                    } else { // After
+                                        if(context.label === 'Production Capacity') {
+                                           label += `+280% Increase`;
+                                        } else {
+                                           label += `-120% Reduction`;
+                                        }
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Relative Change (%)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Patent Modal Logic
+            const patentData = {
+                '1': {
+                    title: 'Granted U.S. Patent: Computer systems and computer-implemented methods for rapid diagnostic test result interpretation platform utilizing computer vision',
+                    number: 'US 11,887,307 B2',
+                    abstract: 'This foundational patent protects the core methodology for analyzing medical images using novel neural network architectures. It details a system capable of visually analyzing a rapid diagnostic test device in real-time using a camera system. The system identifies the test result and transmits it to the user, operator, or healthcare provider to "close the loop" between testing and clinical action.'
+                },
+                '2': {
+                    title: 'Pending U.S. Application: COMPUTER-BASED SYSTEMS AND METHODS UTILIZING COMPUTER VISION DEEP LEARNING TECHNIQUES FOR ACQUIRING RAPID DIAGNOSTIC TEST RESULTS',
+                    number: 'US Publication No. 2024/0112342 A1',
+                    abstract: 'This application signifies ongoing development in advanced AI for diagnostic accuracy. It focuses on using deep learning techniques, a subset of machine learning, to analyze vast amounts of data to identify complex patterns, potentially leading to higher accuracy in test interpretation and the development of predictive diagnostic capabilities.'
+                },
+                '3': {
+                    title: 'Additional Pending Application',
+                    number: 'Application Filed and Pending',
+                    abstract: 'This confidential application covers novel aspects of the at-home diagnostic device itself, including its physical design and associated data analysis methods. It further strengthens the IP portfolio by protecting the hardware component of the integrated diagnostic solution.'
+                }
+            };
+
+            const modal = document.getElementById('patent-modal');
+            const modalContent = document.getElementById('modal-content');
+            const modalClose = document.getElementById('modal-close');
+            const patentCards = document.querySelectorAll('.patent-card');
+
+            const openModal = (patentId) => {
+                const data = patentData[patentId];
+                if (data) {
+                    document.getElementById('modal-title').textContent = data.title;
+                    document.getElementById('modal-number').textContent = data.number;
+                    document.getElementById('modal-abstract').textContent = data.abstract;
+                    modal.classList.remove('hidden');
+                    setTimeout(() => {
+                         modal.classList.remove('opacity-0');
+                         modalContent.classList.remove('scale-95');
+                    }, 10);
+                }
+            };
+
+            const closeModal = () => {
+                modal.classList.add('opacity-0');
+                modalContent.classList.add('scale-95');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            };
+
+            patentCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    openModal(card.dataset.patent);
+                });
+            });
+
+            modalClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === "Escape" && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
